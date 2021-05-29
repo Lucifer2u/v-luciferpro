@@ -1,7 +1,7 @@
 <template>
 <div>
 <!--  v-model:rules=:rules-->
-  <el-form :rules="rules" :model="loginForm" class="loginContainer">
+  <el-form :rules="rules" ref="loginForm" :model="loginForm" class="loginContainer">
     <h3 class="login-title">系统登录</h3>
 
     <el-form-item prop="username">
@@ -14,7 +14,7 @@
 
     <el-checkbox class="loginRemember" v-model="checked"></el-checkbox>
 
-    <el-button type="primary" style="width:100%;">登录</el-button>
+    <el-button type="primary" style="width:100%;" @click="submitLogin">登录</el-button>
   </el-form>
 </div>
 </template>
@@ -33,6 +33,18 @@ export default {
         username:[{required: true, message:"请输入你的用户名",trigger:"blur"}],
         password:[{required: true, message:"请输入密码",trigger:"blur"}]
       }
+    }
+  },
+  methods:{
+    submitLogin(){
+      this.$refs.loginForm.validate((valid) => {
+        if (valid) {
+          alert('提交成功!');
+        } else {
+          this.$message.error('请输入所有字段');
+          return false;
+        }
+      });
     }
   }
 }
