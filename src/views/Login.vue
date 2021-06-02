@@ -20,6 +20,7 @@
 </template>
 
 <script>
+
 export default {
   name: "Login",
   data(){
@@ -39,7 +40,13 @@ export default {
     submitLogin(){
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
-          alert('提交成功!');
+          this.postKeyValueRequest('/doLogin',this.loginForm).then(resp => {
+            if (resp){
+              window.sessionStorage.setItem("user", JSON.stringify(resp.obj));
+              this.$router.replace('/home')
+            }
+          })
+          // alert('提交成功!');
         } else {
           this.$message.error('请输入所有字段');
           return false;
