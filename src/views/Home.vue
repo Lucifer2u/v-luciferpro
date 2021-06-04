@@ -4,7 +4,7 @@
 
     <el-container>
       <el-header class="homeHeader">
-        <div class="title">后台管理系统</div>
+        <div class="title">Lucifer</div>
 
               <el-dropdown class="userInfo" @command="commandHandler">
         <span class="el-dropdown-link">
@@ -34,6 +34,14 @@
           </el-menu>
         </el-aside>
         <el-main>
+          <el-breadcrumb separator-class="el-icon-arrow-right" v-if="this.$router.currentRoute.path!='/home'">
+            <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item>{{this.$router.currentRoute.name}}</el-breadcrumb-item>
+          </el-breadcrumb>
+
+          <div class="homeWelcome" v-if="this.$router.currentRoute.path == '/home'">
+            欢迎进入Lucifer管理系统！
+          </div>
           <router-view/>
         </el-main>
       </el-container>
@@ -86,6 +94,14 @@ export default {
 </script>
 
 <style scoped>
+
+.homeWelcome{
+  text-align: center;
+  font-size: 30px;
+  font-family: "JetBrains Mono";
+  color:#409eff;
+  padding-top: 50px;
+}
 
 .homeHeader {
   background-color: #409eff;
