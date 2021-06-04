@@ -43,7 +43,9 @@ export default {
           this.postKeyValueRequest('/doLogin',this.loginForm).then(resp => {
             if (resp){
               window.sessionStorage.setItem("user", JSON.stringify(resp.obj));
-              this.$router.replace('/home')
+              let path = this.$route.query.redirect;
+
+              this.$router.replace((path == '/home' || path == undefined)? '/home' : path)
             }
           })
           // alert('提交成功!');

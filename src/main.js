@@ -28,8 +28,15 @@ router.beforeEach((to,from,next) => {
   if (to.path == '/') {
     next();
   } else {
-    initMenu(router, store);
-    next();
+      if (window.sessionStorage.getItem("user")){
+        initMenu(router, store);
+        next();
+      } else {
+
+        next('/?redirect=' + to.path);
+
+      }
+
   }
 })
 
