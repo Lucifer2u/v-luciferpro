@@ -42,7 +42,7 @@
           <div class="homeWelcome" v-if="this.$router.currentRoute.path == '/home'">
             欢迎进入Lucifer管理系统！
           </div>
-          <router-view/>
+          <router-view class="homeRouterView"/>
         </el-main>
       </el-container>
     </el-container>
@@ -94,6 +94,10 @@ export default {
 </script>
 
 <style scoped>
+
+.homeRouterView{
+  margin-top: 15px;
+}
 
 .homeWelcome{
   text-align: center;
