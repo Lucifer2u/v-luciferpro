@@ -16,7 +16,7 @@ const routes = [
       name: 'Home',
       component: Home,
       hidden:true
-    }
+    },
 ]
 
 const router = new VueRouter({
