@@ -15,13 +15,13 @@ axios.interceptors.response.use(success=>{
     return success.data;
 
 },error => {
-    if (error.response.status == 504 || err.response.status == 404){
+    if (error.response.status == 504 || error.response.status == 404){
         Message.error({message:'服务器GG了哦　╮(￣▽￣"")╭'})
     } else if (error.response.status == 403) {
         Message.error({message:'您的权限不够哦　╮(￣▽￣"")╭'})
     } else if (error.response.status == 401){
         Message.error({message:'尚未登录，请登录'})
-        router.replace('/')
+        router.replace('/');
     } else {
         if (error.response.data.msg){
             Message.error({message:error.response.data.msg})

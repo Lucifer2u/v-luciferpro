@@ -14,7 +14,10 @@
     </div>
 
     <div class="permissManaMain">
-      <el-collapse v-model="activeName" @change="change">
+      <el-collapse
+          v-model="activeName"
+          accordion
+          @change="change">
         <el-collapse-item :title="r.nameZh" :name="r.id" v-for="(r,index) in roles" :key="index">
 
           <el-card class="box-card">

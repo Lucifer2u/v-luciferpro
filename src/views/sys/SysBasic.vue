@@ -20,7 +20,7 @@
         name: "SysBasic",
         data(){
             return {
-              activeName: 'permissMana'
+              activeName: 'depMana'
             }
         },
         components:{
