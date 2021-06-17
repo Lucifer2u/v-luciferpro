@@ -20,6 +20,10 @@
       <el-table
           :data="jls"
           border
+          v-loading="loading"
+          element-loading-text="正在加载..."
+          element-loading-spinner="el-icon-loading"
+          element-loading-background="rgba(0, 0, 0, 0.8)"
           size="small"
           @selection-change="handleSelectionChange"
           style="width: 80%">
@@ -124,6 +128,7 @@ export default {
   name: "JobLevelMana",
   data() {
     return {
+      loading: false,
       multipleSelection: [],
       dialogVisible: false,
       updateJl: {
@@ -218,7 +223,9 @@ export default {
       }
     },
     initJls() {
+      this.loading = true;
       this.getRequest("/system/basic/joblevel/").then(resp => {
+        this.loading = false;
         if (resp) {
           this.jls = resp;
           this.jl = {
