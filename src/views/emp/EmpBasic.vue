@@ -764,8 +764,6 @@ export default {
       this.searchValue.posId = null;
       this.searchValue.engageForm = null;
       this.searchValue.beginDateScope = null;
-      this.inputDepName = '请选择所属部门';
-
     },
     currentChange(currentPage) {
       this.page = currentPage;
