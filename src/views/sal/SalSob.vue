@@ -194,16 +194,7 @@ export default {
       this.salary.name = data.name;
       this.salary.id = data.id;
     },
-
-
-
   }
-
-
-
-
-
-
 }
 </script>
 
