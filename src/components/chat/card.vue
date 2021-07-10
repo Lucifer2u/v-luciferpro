@@ -1,7 +1,7 @@
 <template>
   <div id="card">
   	<header>
-  		<img class="avatar" v-bind:src="user.img" v-bind:alt="user.name">
+  		<img class="avatar" v-bind:src="user.userface" v-bind:alt="user.name">
   		<p class="name">{{user.name}}</p>
   	</header>
   	<footer>
@@ -15,10 +15,7 @@ export default {
   name: 'card',
   data () {
     return {
-      user: {
-      	name: 'Lucifer',
-      	img: 'https://lh3.googleusercontent.com/ogw/ADea4I4UiCBWlji9CTAQDpn3Sa7MlG0EW_QT9_UrmQC0=s64-c-mo'
-      }
+      user: JSON.parse(window.sessionStorage.getItem("user"))
     }
   }
 }

@@ -1,13 +1,13 @@
 <template>
-  <div id="message" v-scroll-bottom="session">
+  <div id="message" v-scroll-bottom="sessions">
   	<ul v-if="currentSessionId==item.id" v-for="item in sessions">
   		<li v-for="entry in item.messages">
   			<p class="time">
   				<span>{{entry.date | time}}</span>
   			</p>
   			<div class="main" :class="{self:entry.self}">
-  				<img class="avatar" :src="entry.self ? img : item.user.img" alt="">
-  				<p class="text" style="margin-top: 0; margin-bottom: 0;">{{entry.content}}</p>
+          <img class="avatar" :src="entry.self ? user.userface : currentSession.userface" alt="">
+          <p class="text" style="margin-top: 0; margin-bottom: 0;">{{entry.content}}</p>
   			</div>
   		</li>
   	</ul>
@@ -21,7 +21,7 @@ export default {
   name: 'message',
   data () {
     return {
-      img: 'https://lh3.googleusercontent.com/ogw/ADea4I4UiCBWlji9CTAQDpn3Sa7MlG0EW_QT9_UrmQC0=s64-c-mo'
+      user: JSON.parse(window.sessionStorage.getItem("user"))
     }
   },
   computed:mapState([
@@ -56,6 +56,8 @@ export default {
   ul {
   	list-style-type: none;
     padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
     li {
   		margin-bottom: 15px;
   	}
