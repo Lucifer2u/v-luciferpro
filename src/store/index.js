@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import {getRequest} from "../utils/api";
-
+import SockJS from 'sockjs-client'
+import Stomp from 'stompjs'
 
 Vue.use(Vuex)
 
@@ -15,10 +16,8 @@ const store = new Vuex.Store({
         sessions: {},
         hrs: [],
         currentSessionId: -1,
-        currentHr: JSON.parse(window.sessionStorage.getItem("user")),
         filterKey: '',
         stomp: null,
-        isDot: {}
     },
 
 
@@ -47,6 +46,15 @@ const store = new Vuex.Store({
         }
     },
     actions:{
+        connect(context) {
+            context.state.stomp = Stomp.over(new SockJS('/ws/ep'));
+            context.state.stomp.connect({}, success => {
+                context.state.stomp.subscribe('/user/queue/chat', msg => {
+                    console.log('连接成功');
+                })
+            }, error => {
+            })
+        },
         initData(context) {
             context.commit('INIT_DATA')
             getRequest("/chat/hrs").then(resp => {
