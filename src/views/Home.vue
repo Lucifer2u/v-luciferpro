@@ -57,13 +57,16 @@ export default {
   name: "Home",
   data() {
     return {
-      user: JSON.parse(window.sessionStorage.getItem("user"))
+      // user: JSON.parse(window.sessionStorage.getItem("user"))
     }
   },
 
   computed : {
     routes() {
       return this.$store.state.routes
+    },
+    user() {
+      return this.$store.state.currentHr;
     }
   },
 
@@ -88,6 +91,8 @@ export default {
             message: '已取消操作'
           });
         });
+      }else if (cmd == 'userinfo') {
+        this.$router.push('/hrinfo');
       }
     },
     goHome() {
