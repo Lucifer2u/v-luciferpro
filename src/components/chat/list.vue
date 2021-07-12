@@ -1,11 +1,11 @@
 <template>
   <div id="list">
   	<ul style="padding-left: 0px">
-  		<li v-for="item in hrs" :class="{ active: item.id === currentSessionId }"
-          v-on:click="changeCurrentSessionId(item.id)"><!--   :class="[item.id === currentSessionId ? 'active':'']" -->
+      <li v-for="item in hrs" :class="{ active: currentSession ? item.username === currentSession.username : false}"
+          v-on:click="changeCurrentSession(item)"><!--   :class="[item.id === currentSession ? 'active':'']" -->
   			<img class="avatar" :src="item.userface" :alt="item.name">
-  			<p class="name">{{item.name}}</p>
-  		</li>
+        <el-badge :is-dot="isDot[user.username+'#'+item.username]"><p class="name">{{item.name}}</p></el-badge>
+      </li>
   	</ul>
   </div>
 </template>
@@ -17,17 +17,18 @@ export default {
   name: 'list',
   data () {
     return {
-      
+      user:JSON.parse(window.sessionStorage.getItem("user"))
     }
   },
   computed: mapState([
-  'hrs',
-  'currentSessionId'
+    'isDot',
+    'hrs',
+  'currentSession'
 	]),
   methods:{
-  	changeCurrentSessionId:function (id) {
-  		this.$store.commit('changeCurrentSessionId',id)
-  	}
+    changeCurrentSession (currentSession) {
+      this.$store.commit('changeCurrentSession', currentSession)
+    }
   }
 }
 </script>
@@ -35,7 +36,7 @@ export default {
 <style lang="scss" scoped>
 #list {
 	li {
-		padding: 5px 15px;
+		padding: 10px 15px;
 		border-bottom: 1px solid #292C33;
 		cursor: pointer;
     list-style: none;
@@ -55,6 +56,8 @@ export default {
 	.name {
 		display: inline-block;
 		margin-left: 15px;
+    margin-top: 0px;
+    margin-bottom: 0px;
 	}
 }
 </style>
