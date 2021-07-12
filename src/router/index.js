@@ -36,8 +36,10 @@ const routes = [
             hidden: true
         }
     ]
-
-    },
+    },{
+        path: '*',
+        redirect: '/home'
+    }
 
 
 ]
